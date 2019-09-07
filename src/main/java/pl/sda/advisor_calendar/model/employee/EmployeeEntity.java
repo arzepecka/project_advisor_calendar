@@ -20,7 +20,7 @@ public class EmployeeEntity {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(name = "imię")
+    @Column(name = "imie")
     private String name;
     @Column(name = "nazwisko")
     private String lastName;

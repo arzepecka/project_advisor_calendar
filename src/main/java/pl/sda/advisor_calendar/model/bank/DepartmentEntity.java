@@ -14,20 +14,20 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "oddział banku")
+@Table(name = "oddzial_banku")
 public class DepartmentEntity {
 
     @Id
     @GeneratedValue
     private Long id;
-    @Column(name = "województwo")
+    @Column(name = "wojewodztwo")
     private String province;
     @Column(name = "miasto")
     private String city;
     @Column(name = "adres")
     private String address;
 
-    @OneToMany(mappedBy = "employees")
+    @OneToMany(mappedBy = "departmentEntity")
     private List<EmployeeEntity> departmentEmployeesList;
 
     public DepartmentDTO toDto() {

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "dostępność pracownika")
+@Table(name = "dostępnosc_pracownika")
 public class EmployeeAvailabilityEntity {
 
     @Id
