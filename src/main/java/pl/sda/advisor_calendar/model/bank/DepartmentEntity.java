@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import pl.sda.advisor_calendar.model.employee.EmployeeEntity;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -26,6 +27,10 @@ public class DepartmentEntity {
     private String city;
     @Column(name = "adres")
     private String address;
+    @Column(name = "czynny_od")
+    private Instant availableFrom;
+    @Column(name = "czynny_do")
+    private Instant availableTo;
 
     @OneToMany(mappedBy = "departmentEntity")
     private List<EmployeeEntity> departmentEmployeesList;
@@ -36,6 +41,8 @@ public class DepartmentEntity {
                 .province(province)
                 .city(city)
                 .address(address)
+                .availableFrom(availableFrom)
+                .availableTo(availableTo)
                 .build();
     }
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import pl.sda.advisor_calendar.model.bank.DepartmentEntity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Builder
@@ -30,6 +31,9 @@ public class EmployeeEntity {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private DepartmentEntity departmentEntity;
+
+    @OneToMany
+    private Set<EmployeeAvailabilityEntity> availabilities;
 
     public EmployeeDTO toDto() {
         return EmployeeDTO.builder()
