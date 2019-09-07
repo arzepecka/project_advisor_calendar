@@ -22,7 +22,7 @@ public class DepartmentEntity {
     private Long id;
     @Column(name = "wojewodztwo")
     private String province;
-    @Column(name = "miasto")
+    @Column(name = "miejscowosc")
     private String city;
     @Column(name = "adres")
     private String address;
