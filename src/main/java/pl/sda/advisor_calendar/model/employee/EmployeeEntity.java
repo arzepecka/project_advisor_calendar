@@ -27,6 +27,8 @@ public class EmployeeEntity {
     private String lastName;
     @Column(name = "specjalizacja")
     private String jobTitle;
+    @Column(name = "email")
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
