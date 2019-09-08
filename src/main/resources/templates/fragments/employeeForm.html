@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Umów spotkanie</title>
+</head>
+
+<body>
+<div th:fragment="employeeForm">
+    Wybierz oddział
+    <br>
+    <label th:for="privince"></label>
+    <select id="province">
+        <option selected>Województwo</option>
+    </select> </br></br>
+    <label th:for="city"></label>
+    <select id="city">
+        <option selected>Miasto</option>
+    </select></br></br>
+    <label th:for="address"></label>
+    <select id="address">
+        <option selected>Adres oddziału</option>
+    </select></br></br>
+    <label th:for="jobTitle"></label>
+    <select id="jobTitle">
+        <option selected>Specjalizacja</option>
+    </select></br></br>
+    <label th:for="employee"></label>
+    <select id="employee">
+        <option selected>Imie i nazwisko</option>
+    </select>
+    </br></br>
+
+</div>
+
+</body>
+</html>
