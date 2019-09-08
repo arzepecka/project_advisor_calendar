@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Umów spotkanie</title>
+</head>
+<body>
+
+<form th:action="@{/create_visit/sum-up}" method="POST" th:object="${visit}">
+
+<table>
+    <tr>
+        <th>
+            <div th:replace="fragments/clientForm :: clientForm"></div>
+
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+    </tr>
+</table>
+
+<tr><td></td><td> <button type="submit">Zatwierdź</button></td></tr>
+</form>
+
+</body>
+</html>
