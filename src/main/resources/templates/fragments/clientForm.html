@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Umów spotkanie</title>
+</head>
+
+<body>
+<div th:fragment="clientForm">
+<form>
+
+    <table class="blueTable" style="height: 155px;" width="586" bgcolor="#d3d3d3" >
+        <tr>
+            <td></td>
+            <td align="center"><input type="hidden" id="id" name="id" th:value="${userDTO.id}"/></td>
+        </tr>
+        <br>
+        <tr>
+            <td width="100px">Imie:</td>
+            <td align="center"><input type="text" id="name" name="name" placeholder="Wpisz imię" th:value="${userDTO.name}"/></td>
+        </tr>
+        <br>
+        <tr>
+            <td>Nazwisko:</td>
+            <td align="center"><input type="text" id="lastName" name="lastName" placeholder="Wpisz nazwisko"
+                       th:value="${userDTO.lastName}"/></td>
+        </tr>
+        <br>
+        <tr>
+            <td>Numer telefonu:</td>
+            <td align="center"><input type="text" id="phoneNumber" name="phoneNumber" placeholder="Wpisz numer w formacie XXX-XXX-XXX"
+                       th:value="${userDTO.phoneNumber}"/></td>
+        </tr>
+        <br>
+        <tr>
+            <td>E-mail:</td>
+            <td align="center"><input type="text" id="email" name="email" placeholder="Wpisz email" th:value="${userDTO.email}"/></td>
+        </tr>
+        <br>
+
+
+    </table>
+</form>
+
+
+</body>
+</html>

@@ -37,6 +37,7 @@ public class VisitService {
 
     private VisitEntity mapToVisit(VisitDTO dto) {
         return new VisitEntity(
+                dto.getId(),
                 dto.getName(),
                 dto.getLastName(),
                 dto.getEmail(),

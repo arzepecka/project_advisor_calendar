@@ -22,7 +22,7 @@ public class UserEntity {
     private String name;
     @Column(name = "nazwisko")
     private String lastName;
-    @Column(name = "numer telefonu")
+    @Column(name = "numer_telefonu")
     private Long phoneNumber;
     @Column(name = "e_mail")
     private String email;
