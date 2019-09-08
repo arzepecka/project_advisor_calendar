@@ -1,9 +1,6 @@
 package pl.sda.advisor_calendar.model.visit;
 
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/create_visit")
@@ -15,7 +12,7 @@ public class VisitController {
         this.visitService = visitService;
     }
 
-    @PutMapping
+    @PostMapping
     public VisitDTO add(@RequestBody VisitDTO dto){
         return visitService.add(dto);
     }
