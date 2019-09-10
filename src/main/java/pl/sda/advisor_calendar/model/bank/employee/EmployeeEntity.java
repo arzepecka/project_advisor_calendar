@@ -1,13 +1,13 @@
-package pl.sda.advisor_calendar.model.employee;
+package pl.sda.advisor_calendar.model.bank.employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.sda.advisor_calendar.model.bank.DepartmentEntity;
+import pl.sda.advisor_calendar.model.bank.address.AddressEntity;
+import pl.sda.advisor_calendar.model.bank.employee.type.JobTitleEntity;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Builder
@@ -31,11 +31,12 @@ public class EmployeeEntity {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
-    private DepartmentEntity departmentEntity;
+    @JoinColumn(name = "adres_oddzialu")
+    private AddressEntity addressEntity;
 
-    @OneToMany
-    private Set<EmployeeAvailabilityEntity> availabilities;
+    @ManyToOne
+    @JoinColumn(name = "specjalizacja")
+    private JobTitleEntity jobTitleEntity;
 
     public EmployeeDTO toDto() {
         return EmployeeDTO.builder()

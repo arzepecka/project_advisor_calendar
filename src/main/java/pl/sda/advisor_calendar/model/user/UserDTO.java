@@ -15,5 +15,5 @@ public class UserDTO {
     private String lastName;
     private Long phoneNumber;
     private String email;
-
+    private Boolean regConfirm;
 }

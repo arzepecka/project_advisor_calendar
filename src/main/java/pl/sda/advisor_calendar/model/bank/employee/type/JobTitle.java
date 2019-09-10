@@ -1,4 +1,4 @@
-package pl.sda.advisor_calendar.model.employee.type;
+package pl.sda.advisor_calendar.model.bank.employee.type;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,9 +14,9 @@ public enum JobTitle {
 
     @Getter
     @Setter
-    String label;
+    String jobTitle;
 
-    JobTitle(String label) {
-        this.label = label;
+    JobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 }
