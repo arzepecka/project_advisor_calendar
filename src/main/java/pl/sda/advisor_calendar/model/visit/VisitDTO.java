@@ -23,6 +23,6 @@ public class VisitDTO {
     private Instant availableFrom;
     private Instant availableTo;
 
-    public VisitDTO(String name, String lastName, String email, Long phoneNumber, String province, String city, String address, Instant availableFrom, Instant availableTo) {
+    public VisitDTO(Long id, String name, String lastName, String email, Long phoneNumber, String province, String city, String address, Instant availableFrom, Instant availableTo) {
     }
 }

@@ -18,7 +18,6 @@ public class VisitEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "imie")
     private String name;
     @Column(name = "Nazwisko")
     private String lastName;
@@ -37,6 +36,7 @@ public class VisitEntity {
     @Column(name = "otwarty_do")
     private Instant availableTo;
 
-    public VisitEntity(Long id, String name, String lastName, String email, Long phoneNumber, String province, String city, String address, Instant availableFrom, Instant availableTo) {
+    public VisitEntity(String name, String lastName, Long phoneNumber, String email, String province, String city, String address, Instant availableFrom, Instant availableTo) {
     }
+
 }

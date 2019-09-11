@@ -1,0 +1,691 @@
+Index: src/main/java/pl/sda/advisor_calendar/model/employee/EmployeeRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/employee/EmployeeRepository.java	(date 1568143518452)
++++ src/main/java/pl/sda/advisor_calendar/model/employee/EmployeeRepository.java	(date 1568143518452)
+@@ -0,0 +1,6 @@
++package pl.sda.advisor_calendar.model.employee;
++
++import org.springframework.data.jpa.repository.JpaRepository;
++
++public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
++}
+Index: src/main/java/pl/sda/advisor_calendar/model/employee/EmployeeService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/employee/EmployeeService.java	(date 1568147637651)
++++ src/main/java/pl/sda/advisor_calendar/model/employee/EmployeeService.java	(date 1568147637651)
+@@ -0,0 +1,31 @@
++package pl.sda.advisor_calendar.model.employee;
++
++import org.springframework.stereotype.Service;
++import org.springframework.transaction.annotation.Transactional;
++import pl.sda.advisor_calendar.model.user.UserEntity;
++
++import javax.servlet.http.HttpServletRequest;
++import javax.servlet.http.HttpServletResponse;
++import java.util.List;
++import java.util.stream.Collectors;
++
++@Service
++@Transactional
++public class EmployeeService {
++
++    private final EmployeeRepository employeeRepository;
++
++    public EmployeeService(EmployeeRepository employeeRepository) {
++        this.employeeRepository = employeeRepository;
++    }
++
++    private List<EmployeeDTO> getAll(){
++        return employeeRepository.findAll().stream()
++                .map(e-> new EmployeeDTO(e.getDepartmentEntity().getProvince(),
++                        e.getDepartmentEntity().getCity(),
++                        e.getDepartmentEntity().getAddress(),
++                        e.getJobTitle(),
++                        e.getName(), e.getLastName())).collect(Collectors.toList());
++    }
++
++}
+Index: src/main/resources/templates/fragments/employeeForm.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/fragments/employeeForm.html	(date 1568143518469)
++++ src/main/resources/templates/fragments/employeeForm.html	(date 1568143518469)
+@@ -0,0 +1,38 @@
++<!DOCTYPE html>
++<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
++<head>
++    <meta charset="UTF-8">
++    <title>Umów spotkanie</title>
++</head>
++
++<body>
++<div th:fragment="employeeForm">
++    <form th:action="@{/department/get}" method="get" th:object="${departments}">
++    Wybierz oddział
++    <br>
++    <label th:for="province"></label>
++    <select id="province">
++        <option selected>Województwo</option>
++    </select> </br></br>
++    <label th:for="city"></label>
++    <select id="city">
++        <option selected>Miasto</option>
++    </select></br></br>
++    <label th:for="address"></label>
++    <select id="address">
++        <option selected>Adres oddziału</option>
++    </select></br></br>
++    <label th:for="jobTitle"></label>
++    <select id="jobTitle">
++        <option selected>Specjalizacja</option>
++    </select></br></br>
++    <label th:for="employee"></label>
++    <select id="employee">
++        <option selected>Imie i nazwisko</option>
++    </select>
++    </br></br>
++    </form>
++</div>
++
++</body>
++</html>
+\ No newline at end of file
+Index: src/main/resources/templates/fragments/calendarForm.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/fragments/calendarForm.html	(date 1568143518455)
++++ src/main/resources/templates/fragments/calendarForm.html	(date 1568143518455)
+@@ -0,0 +1,58 @@
++<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<html>
++<head>
++    <title>Umów spotkanie</title>
++    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
++    <style>
++        table, th, td , div.container, div.col-sm{
++            border-collapse: collapse;
++            border: black solid 1px;
++        }
++        p.SATURDAY{
++            color: darkgray;
++        }
++        p.SUNDAY{
++            color: red;
++        }
++    </style>
++</head>
++<body>
++<div th:fragment="calendarForm">
++    <h1>${monthName} ${firstDay.year}</h1>
++    <div class="container">
++        <div class="row">
++            <div class="col-sm">Poniedziałek</div>
++            <div class="col-sm">Wtorek</div>
++            <div class="col-sm">Środa</div>
++            <div class="col-sm">Czwartek</div>
++            <div class="col-sm">Piątek</div>
++            <div class="col-sm">Sobota</div>
++            <div class="col-sm">Niedziela</div>
++        </div>
++        <div class="row">
++            <c:forEach begin="1" end="${firstDay.dayOfWeek.value - 1}">
++                <div class="col-sm"></div>
++            </c:forEach>
++
++            <c:forEach items="${tasks}" var="tasksForDay" varStatus="status">
++                <div class="col-sm">
++                    <c:set var="day" value="${firstDay
++                    .withDayOfMonth(status.index+1)}"/>
++                    <p class="${day.dayOfWeek}"><b>${status.index+1} </b></p>
++                    <c:forEach items="${tasksForDay}" var="task">
++                        <p>${task.description}</p>
++                    </c:forEach>
++                </div>
++                <c:if test="${day.dayOfWeek.value == 7}">
++        </div><div class="row">
++        </c:if>
++        </c:forEach>
++        <c:forEach begin="${day.dayOfWeek.value + 1}" end="7">
++            <div class="col-sm"></div>
++        </c:forEach>
++    </div>
++    </div>
++
++</body>
++</html>
+\ No newline at end of file
+Index: src/main/java/pl/sda/advisor_calendar/model/bank/DepartmentService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/bank/DepartmentService.java	(date 1568143518451)
++++ src/main/java/pl/sda/advisor_calendar/model/bank/DepartmentService.java	(date 1568143518451)
+@@ -0,0 +1,27 @@
++package pl.sda.advisor_calendar.model.bank;
++
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.stereotype.Service;
++import org.springframework.transaction.annotation.Transactional;
++
++import java.util.List;
++import java.util.stream.Collectors;
++
++@Service
++@Transactional
++public class DepartmentService {
++
++    private final DepartmentRepository departmentRepository;
++
++    @Autowired
++    public DepartmentService(DepartmentRepository departmentRepository) {
++        this.departmentRepository = departmentRepository;
++    }
++
++    public List<DepartmentDTO> findByPrivace(String province){
++        return departmentRepository.findDistinctByProvinceOrderByProvinceAsc(province)
++                .stream()
++                .map(DepartmentEntity::toDto)
++                .collect(Collectors.toList());
++    }
++}
+Index: src/main/java/pl/sda/advisor_calendar/model/bank/DepartmentController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/bank/DepartmentController.java	(date 1568143518449)
++++ src/main/java/pl/sda/advisor_calendar/model/bank/DepartmentController.java	(date 1568143518449)
+@@ -0,0 +1,28 @@
++package pl.sda.advisor_calendar.model.bank;
++
++import lombok.RequiredArgsConstructor;
++import org.springframework.stereotype.Controller;
++import org.springframework.web.bind.annotation.GetMapping;
++import org.springframework.web.bind.annotation.PathVariable;
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.servlet.ModelAndView;
++
++import java.util.List;
++
++@Controller
++@RequestMapping("/department")
++@RequiredArgsConstructor
++public class DepartmentController {
++
++    private final DepartmentService departmentService;
++
++
++    @GetMapping("get/{province}")
++    ModelAndView getProvince(@PathVariable String province){
++        ModelAndView modelAndView = new ModelAndView("employeeForm.html");
++        modelAndView.addObject("province", province);
++        modelAndView.addObject("departments", departmentService.findByPrivace(province));
++        return modelAndView;
++
++    }
++}
+Index: src/main/java/pl/sda/advisor_calendar/model/repository/DepartmentProvinceRepository.java
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/repository/DepartmentProvinceRepository.java	(date 1567943214000)
++++ src/main/java/pl/sda/advisor_calendar/model/repository/DepartmentProvinceRepository.java	(date 1567943214000)
+@@ -1,9 +0,0 @@
+-package pl.sda.advisor_calendar.model.repository;
+-
+-import org.springframework.data.jpa.repository.JpaRepository;
+-import pl.sda.advisor_calendar.model.bank.DepartmentEntity;
+-
+-public interface DepartmentProvinceRepository extends JpaRepository<DepartmentEntity, Long> {
+-
+-    DepartmentEntity findDistinctByProvinceOrderByProvinceAsc(String searchProvince);
+-}
+Index: src/main/java/pl/sda/advisor_calendar/model/bank/DepartmentRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/bank/DepartmentRepository.java	(date 1567943214000)
++++ src/main/java/pl/sda/advisor_calendar/model/bank/DepartmentRepository.java	(date 1568143518450)
+@@ -1,6 +1,23 @@
+ package pl.sda.advisor_calendar.model.bank;
+ 
+ import org.springframework.data.jpa.repository.JpaRepository;
++import org.springframework.data.jpa.repository.Query;
++
++import java.util.List;
+ 
+ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Long> {
++
++    List<DepartmentEntity> findDistinctByProvinceOrderByProvinceAsc(String searchProvince);
++
++//    @Query("select city from DepartmentEntity where provinceIsChosen ")
++//    List<DepartmentEntity> findByCity(String searchCity);
++//
++//    @Query("select address from DepartmentEntity where cityIsChosen ")
++//    List<DepartmentEntity> findByAddress(String searchAddress);
++//
++//    @Query("select jobTitle from DepartmentEntity where addressIsChosen")
++//    List<DepartmentEntity> findByJobTitle(String searchJobTitle);
++//
++//    @Query("select lastName from DepartmentEntity where provinceIsChosen ")
++//    List<DepartmentEntity> findByName(String searchName);
+ }
+Index: src/main/java/pl/sda/advisor_calendar/model/visit/VisitService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/visit/VisitService.java	(date 1567943214000)
++++ src/main/java/pl/sda/advisor_calendar/model/visit/VisitService.java	(date 1568230746271)
+@@ -2,6 +2,8 @@
+ 
+ import org.springframework.stereotype.Service;
+ 
++import javax.servlet.http.HttpServletRequest;
++import javax.servlet.http.HttpServletResponse;
+ import javax.transaction.Transactional;
+ 
+ @Service
+@@ -14,15 +16,32 @@
+         this.visitRepository = visitRepository;
+     }
+ 
+-    public VisitDTO add(VisitDTO dto){
+-        VisitEntity e = mapToVisit(dto);
+-        e = visitRepository.save(e);
++//    public VisitDTO add(VisitDTO dto){
++//        VisitEntity e = mapToVisit(dto);
++//        e = visitRepository.save(e);
++//
++//        return mapToDto(e);
++//    }
++
++    protected VisitDTO doPost(HttpServletRequest req, HttpServletResponse resp){
++        String imie = req.getParameter("imie");
++        String nazwisko = req.getParameter("nazwisko");
++        Long numer_telefonu = Long.valueOf(req.getParameter("numer_telefonu"));
++        String email = req.getParameter("email");
+ 
+-        return mapToDto(e);
++        VisitEntity entity= visitRepository.save(VisitEntity.builder()
++                .name(imie)
++                .lastName(nazwisko)
++                .email(email)
++                .phoneNumber(numer_telefonu)
++                        .build());
++
++        return mapToDto(entity);
+     }
+ 
+     private VisitDTO mapToDto(VisitEntity e) {
+         return new VisitDTO(
++                e.getId(),
+                 e.getName(),
+                 e.getLastName(),
+                 e.getEmail(),
+@@ -31,8 +50,8 @@
+                 e.getCity(),
+                 e.getAddress(),
+                 e.getAvailableFrom(),
+-                e.getAvailableTo()
+-        );
++                e.getAvailableTo());
++
+     }
+ 
+     private VisitEntity mapToVisit(VisitDTO dto) {
+@@ -40,8 +59,8 @@
+                 dto.getId(),
+                 dto.getName(),
+                 dto.getLastName(),
+-                dto.getEmail(),
+                 dto.getPhoneNumber(),
++                dto.getEmail(),
+                 dto.getProvince(),
+                 dto.getCity(),
+                 dto.getAddress(),
+Index: src/main/java/pl/sda/advisor_calendar/model/visit/VisitController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/visit/VisitController.java	(date 1567943214000)
++++ src/main/java/pl/sda/advisor_calendar/model/visit/VisitController.java	(date 1568149684220)
+@@ -2,6 +2,9 @@
+ 
+ import org.springframework.web.bind.annotation.*;
+ 
++import javax.servlet.http.HttpServletRequest;
++import javax.servlet.http.HttpServletResponse;
++
+ @RestController
+ @RequestMapping("/create_visit")
+ public class VisitController {
+@@ -12,8 +15,14 @@
+         this.visitService = visitService;
+     }
+ 
+-    @PostMapping
+-    public VisitDTO add(@RequestBody VisitDTO dto){
+-        return visitService.add(dto);
++//    @PostMapping
++//    public VisitDTO add(@RequestBody VisitDTO dto){
++//        return visitService.add(dto);
++//    }
++    @PostMapping("/new")
++    public VisitDTO doPost(HttpServletRequest req, HttpServletResponse resp){
++        return visitService.doPost(req, resp);
+     }
++
++
+ }
+Index: src/main/java/pl/sda/advisor_calendar/model/employee/EmployeeDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/employee/EmployeeDTO.java	(date 1567943214000)
++++ src/main/java/pl/sda/advisor_calendar/model/employee/EmployeeDTO.java	(date 1568143518452)
+@@ -1,6 +1,7 @@
+ package pl.sda.advisor_calendar.model.employee;
+ 
+ import lombok.*;
++import pl.sda.advisor_calendar.model.bank.DepartmentDTO;
+ 
+ @Setter
+ @Getter
+@@ -8,12 +9,18 @@
+ @NoArgsConstructor
+ @AllArgsConstructor
+ @EqualsAndHashCode
+-public class EmployeeDTO {
++public class EmployeeDTO{
+ 
+     private Long id;
+     private String name;
+     private String lastName;
+     private String jobTitle;
+     private String email;
++    private String province;
++    private String city;
++    private String address;
+ 
++
++    public EmployeeDTO(String province, String city, String address1, String jobTitle, String name, String lastName) {
++    }
+ }
+Index: src/main/resources/templates/fragments/clientForm.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/fragments/clientForm.html	(date 1567943214000)
++++ src/main/resources/templates/fragments/clientForm.html	(date 1568143518456)
+@@ -6,41 +6,42 @@
+ </head>
+ 
+ <body>
+-
+-<form>
+-    <table class="blueTable" style="height: 155px;" width="586" bgcolor="#d3d3d3" >
+-        <tr>
+-            <td></td>
+-            <td align="center"><input type="hidden" id="id" name="id" th:value="${userDTO.id}"/></td>
+-        </tr>
+-        <br>
+-        <tr>
+-            <td width="100px">Imie:</td>
+-            <td align="center"><input type="text" id="name" name="name" placeholder="Wpisz imię" th:value="${userDTO.name}"/></td>
+-        </tr>
+-        <br>
+-        <tr>
+-            <td>Nazwisko:</td>
+-            <td align="center"><input type="text" id="lastName" name="lastName" placeholder="Wpisz nazwisko"
+-                       th:value="${userDTO.lastName}"/></td>
+-        </tr>
+-        <br>
+-        <tr>
+-            <td>Numer telefonu:</td>
+-            <td align="center"><input type="text" id="phoneNumber" name="phoneNumber" placeholder="Wpisz numer w formacie XXX-XXX-XXX"
+-                       th:value="${userDTO.phoneNumber}"/></td>
+-        </tr>
+-        <br>
+-        <tr>
+-            <td>E-mail:</td>
+-            <td align="center"><input type="text" id="email" name="email" placeholder="Wpisz email" th:value="${userDTO.email}"/></td>
+-        </tr>
+-        <br>
++<div th:fragment="clientForm">
++    <form>
++        Dane osobowe
++        <table class="blueTable" style="height: 155px;" width="586" bgcolor="#d3d3d3" >
++            <tr>
++                <td></td>
++                <td align="center"><input type="hidden" id="id" name="id" th:value="${userDTO.id}"/></td>
++            </tr>
++            <br>
++            <tr>
++                <td width="100px">Imie:</td>
++                <td align="center"><input type="text" id="name" name="name" placeholder="Wpisz imię" th:value="${userDTO.name}"/></td>
++            </tr>
++            <br>
++            <tr>
++                <td>Nazwisko:</td>
++                <td align="center"><input type="text" id="lastName" name="lastName" placeholder="Wpisz nazwisko"
++                                          th:value="${userDTO.lastName}"/></td>
++            </tr>
++            <br>
++            <tr>
++                <td>Numer telefonu:</td>
++                <td align="center"><input type="text" id="phoneNumber" name="phoneNumber" placeholder="Wpisz numer w formacie XXX-XXX-XXX"
++                                          th:value="${userDTO.phoneNumber}"/></td>
++            </tr>
++            <br>
++            <tr>
++                <td>E-mail:</td>
++                <td align="center"><input type="text" id="email" name="email" placeholder="Wpisz email" th:value="${userDTO.email}"/></td>
++            </tr>
++            <br>
+ 
+ 
+-    </table>
+-</form>
++        </table>
++    </form>
+ 
+-
++</div>
+ </body>
+ </html>
+\ No newline at end of file
+Index: src/main/java/pl/sda/advisor_calendar/model/visit/VisitDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/visit/VisitDTO.java	(date 1567943214000)
++++ src/main/java/pl/sda/advisor_calendar/model/visit/VisitDTO.java	(date 1568231247257)
+@@ -23,6 +23,6 @@
+     private Instant availableFrom;
+     private Instant availableTo;
+ 
+-    public VisitDTO(String name, String lastName, String email, Long phoneNumber, String province, String city, String address, Instant availableFrom, Instant availableTo) {
++    public VisitDTO(Long id, String name, String lastName, String email, Long phoneNumber, String province, String city, String address, Instant availableFrom, Instant availableTo) {
+     }
+ }
+Index: src/main/java/pl/sda/advisor_calendar/model/visit/VisitEntity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/model/visit/VisitEntity.java	(date 1567943214000)
++++ src/main/java/pl/sda/advisor_calendar/model/visit/VisitEntity.java	(date 1568231247263)
+@@ -18,7 +18,6 @@
+     @Id
+     @GeneratedValue(strategy = GenerationType.AUTO)
+     private Long id;
+-    @Column(name = "imie")
+     private String name;
+     @Column(name = "Nazwisko")
+     private String lastName;
+@@ -37,6 +36,7 @@
+     @Column(name = "otwarty_do")
+     private Instant availableTo;
+ 
+-    public VisitEntity(Long id, String name, String lastName, String email, Long phoneNumber, String province, String city, String address, Instant availableFrom, Instant availableTo) {
++    public VisitEntity(String name, String lastName, Long phoneNumber, String email, String province, String city, String address, Instant availableFrom, Instant availableTo) {
+     }
++
+ }
+Index: src/main/resources/templates/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/index.html	(date 1567943214000)
++++ src/main/resources/templates/index.html	(date 1568143518457)
+@@ -8,22 +8,22 @@
+ 
+ <form th:action="@{/create_visit/sum-up}" method="POST" th:object="${visit}">
+ 
+-<table>
+-    <tr>
+-        <th>
+-            <div th:replace="fragments/clientForm :: clientForm"></div>
++    <table>
++        <tr>
++            <th>
++                <div th:replace="fragments/clientForm :: clientForm"></div>
+ 
+-        </th>
+-        <th>
+-
+-        </th>
+-        <th>
+-
+-        </th>
+-    </tr>
+-</table>
+-
+-<tr><td></td><td> <button type="submit">Zatwierdź</button></td></tr>
++            </th>
++            <th>
++                <div th:replace="fragments/employeeForm :: employeeForm"></div>
++            </th>
++            <th>
++                <div th:replace="fragments/calendarForm :: calendarForm"></div>
++            </th>
++        </tr>
++    </table>
++    <br>
++    <button aria-setsize="20px" style="width: 500px; align-content: center" type="submit">Zatwierdź</button>
+ </form>
+ 
+ </body>
+Index: src/main/java/pl/sda/advisor_calendar/web/MainViewController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/sda/advisor_calendar/web/MainViewController.java	(date 1567943214000)
++++ src/main/java/pl/sda/advisor_calendar/web/MainViewController.java	(date 1568143518454)
+@@ -3,6 +3,7 @@
+ import org.springframework.stereotype.Controller;
+ import org.springframework.web.bind.annotation.RequestMapping;
+ import org.springframework.web.servlet.ModelAndView;
++import pl.sda.advisor_calendar.model.user.UserDTO;
+ 
+ @Controller
+ class MainViewController {
+@@ -10,6 +11,7 @@
+     @RequestMapping
+     ModelAndView mainView() {
+         ModelAndView mav = new ModelAndView("index.html");
++        mav.addObject(new UserDTO());
+         return mav;
+     }
+ }
+Index: src/main/resources/templates/fragments/employees.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/fragments/employees.html	(date 1567943214000)
++++ src/main/resources/templates/fragments/employees.html	(date 1568143518468)
+@@ -2,35 +2,37 @@
+ <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+ <head>
+     <meta charset="UTF-8">
+-    <title>Employee</title>
++    <title>Umów spotkanie</title>
+ </head>
++
+ <body>
+-
++<div th:fragment="employeeForm">
++    <form th:action="@{/department/get}" method="get" th:object="${departments}">
++    Wybierz oddział
+     <br>
+-    <label th:for="privince"></label>
++    <label th:for="province"></label>
+     <select id="province">
+         <option selected>Województwo</option>
+     </select> </br></br>
+-
+     <label th:for="city"></label>
+     <select id="city">
+         <option selected>Miasto</option>
+     </select></br></br>
+-
+     <label th:for="address"></label>
+     <select id="address">
+         <option selected>Adres oddziału</option>
+     </select></br></br>
+-
+     <label th:for="jobTitle"></label>
+     <select id="jobTitle">
+         <option selected>Specjalizacja</option>
+     </select></br></br>
+-
+     <label th:for="employee"></label>
+     <select id="employee">
+-        <option selected>Imie i nazwisko</option></select>
++        <option selected>Imie i nazwisko</option>
++    </select>
+     </br></br>
++    </form>
++</div>
+ 
+ </body>
+ </html>
+\ No newline at end of file
+Index: src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/application.properties	(date 1567943214000)
++++ src/main/resources/application.properties	(date 1568231748221)
+@@ -1,7 +1,7 @@
+-server.port=9000
++server.port=9094
+ 
+-spring.datasource.url=jdbc:mysql://localhost:3306/advisor?&serverTimezone=UTC
++spring.datasource.url=jdbc:mysql://localhost:3306/advisor_calendar?&serverTimezone=UTC
+ spring.datasource.username=root
+-spring.datasource.password=KYrus727619
++spring.datasource.password=root
+ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+ spring.jpa.hibernate.ddl-auto=create-drop
+\ No newline at end of file
