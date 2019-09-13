@@ -8,22 +8,22 @@
 
 <form th:action="@{/create_visit/sum-up}" method="POST" th:object="${visit}">
 
-    <table>
-        <tr>
-            <th>
-                <div th:replace="fragments/clientForm :: clientForm"></div>
+<table>
+    <tr>
+        <th>
+            <div th:replace="fragments/clientForm :: clientForm"></div>
 
-            </th>
-            <th>
-                <div th:replace="fragments/employeeForm :: employeeForm"></div>
-            </th>
-            <th>
-                <div th:replace="fragments/calendarForm :: calendarForm"></div>
-            </th>
-        </tr>
-    </table>
-    <br>
-    <button aria-setsize="20px" style="width: 500px; align-content: center" type="submit">Zatwierdź</button>
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+    </tr>
+</table>
+
+<tr><td></td><td> <button type="submit">Zatwierdź</button></td></tr>
 </form>
 
 </body>

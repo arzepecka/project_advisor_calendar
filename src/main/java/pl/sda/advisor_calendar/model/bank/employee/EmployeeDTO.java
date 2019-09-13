@@ -1,4 +1,4 @@
-package pl.sda.advisor_calendar.model.employee;
+package pl.sda.advisor_calendar.model.bank.employee;
 
 import lombok.*;
 import pl.sda.advisor_calendar.model.bank.DepartmentDTO;
