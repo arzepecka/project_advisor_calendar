@@ -1,17 +1,154 @@
 databaseChangeLog:
-  changeSet:
-    id: loadData-example
-    author: liquibase-docs
-    changes:
-      - loadData:
-          catalogName: cat
-          columns:
-            - column:
-                name: address
-                type: varchar(255)
-          encoding: UTF-8
-          file: dataFiles/provincesList.csv
-          quotchar: A String
-          schemaName: public
-          separator: ";"
-          tableName: person
+  - changeSet:
+      id: loadData-example1
+      author: arzepecka
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: id
+                  name: id
+                  type: NUMERIC
+              - column:
+                  header: provinceName
+                  name: wojewodztwo
+                  type: STRING
+            encoding: UTF-8
+            file: dataFiles/provincesList.csv
+            schemaName: advisor_calendar
+            separator: ;
+            tableName: wojewodztwo
+
+  - changeSet:
+      id: loadData-example2
+      author: arzepecka
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: id
+                  name: id
+                  type: NUMERIC
+              - column:
+                  header: province_id
+                  name: wojewodztwo
+                  type: NUMERIC
+              - column:
+                  header: cityName
+                  name: miejscowosc
+                  type: STRING
+            encoding: UTF-8
+            file: dataFiles/citiesList.csv
+            schemaName: advisor_calendar
+            separator: ;
+            tableName: miejscowosc
+
+  - changeSet:
+      id: loadData-example3
+      author: arzepecka
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: id
+                  name: id
+                  type: NUMERIC
+              - column:
+                  header: addressName
+                  name: adres
+                  type: STRING
+              - column:
+                  header: cityName_id
+                  name: miejscowosc
+                  type: NUMERIC
+              - column:
+                  header: departmentAvailability_id
+                  name: dostepnosc_oddzialu
+                  type: NUMERIC
+            encoding: UTF-8
+            file: dataFiles/addressesList.csv
+            schemaName: advisor_calendar
+            separator: ;
+            tableName: adres
+
+  - changeSet:
+      id: loadData-example4
+      author: arzepecka
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: id
+                  name: id
+                  type: NUMERIC
+              - column:
+                  header: openHour
+                  name: czynny_od
+                  type: STRING
+              - column:
+                  header: closeHour
+                  name: czynny_do
+                  type: STRING
+            encoding: UTF-8
+            file: dataFiles/departmentAvailabilityList.csv
+            schemaName: advisor_calendar
+            separator: ;
+            tableName: dostepnosc_oddzialu
+
+  - changeSet:
+      id: loadData-example5
+      author: arzepecka
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: id
+                  name: id
+                  type: NUMERIC
+              - column:
+                  header: name
+                  name: imie
+                  type: STRING
+              - column:
+                  header: lastName
+                  name: nazwisko
+                  type: STRING
+              - column:
+                  header: email
+                  name: email
+                  type: STRING
+              - column:
+                  header: jobTitle_id
+                  name: specjalizacja
+                  type: NUMERIC
+              - column:
+                  header: departmentAddress_id
+                  name: adres_oddzialu
+                  type: NUMERIC
+            encoding: UTF-8
+            file: dataFiles/employeesList.csv
+            schemaName: advisor_calendar
+            separator: ;
+            tableName: pracownik
+
+  - changeSet:
+      id: loadData-example6
+      author: arzepecka
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: id
+                  name: id
+                  type: NUMERIC
+              - column:
+                  header: jobTitleName
+                  name: specjalizacja
+                  type: STRING
+            encoding: UTF-8
+            file: dataFiles/jobTitlesList.csv
+            schemaName: advisor_calendar
+            separator: ;
+            tableName: specjalizacja
+
+

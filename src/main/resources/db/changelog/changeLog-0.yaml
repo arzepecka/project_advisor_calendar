@@ -37,7 +37,7 @@ databaseChangeLog:
               - column:
                   name: czynny_od
                   type: VARCHAR(255)
-            tableName: dotepnosc_oddzialu
+            tableName: dostepnosc_oddzialu
   - changeSet:
       id: 1568462668334-3
       author: rzepe (generated)
@@ -108,45 +108,7 @@ databaseChangeLog:
                   name: specjalizacja
                   type: VARCHAR(255)
             tableName: specjalizacja
-  - changeSet:
-      id: 1568462668334-7
-      author: rzepe (generated)
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    primaryKey: true
-                  name: id
-                  type: BIGINT
-              - column:
-                  name: adres
-                  type: VARCHAR(255)
-              - column:
-                  name: otwarty_od
-                  type: datetime
-              - column:
-                  name: otwarty_do
-                  type: datetime
-              - column:
-                  name: miasto
-                  type: VARCHAR(255)
-              - column:
-                  name: email
-                  type: VARCHAR(255)
-              - column:
-                  name: nazwisko
-                  type: VARCHAR(255)
-              - column:
-                  name: imie
-                  type: VARCHAR(255)
-              - column:
-                  name: numer_telefonu
-                  type: BIGINT
-              - column:
-                  name: wojewodztwo
-                  type: VARCHAR(255)
-            tableName: visit
+
   - changeSet:
       id: 1568462668334-8
       author: rzepe (generated)
