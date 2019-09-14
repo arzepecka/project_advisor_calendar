@@ -17,11 +17,12 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
 
-    @GetMapping("get/{province}")
+    @GetMapping("/get")
     ModelAndView getProvince(@PathVariable String province){
         ModelAndView modelAndView = new ModelAndView("employeeForm.html");
         modelAndView.addObject("province", province);
         modelAndView.addObject("departments", departmentService.findByPrivace(province));
+
         return modelAndView;
 
     }

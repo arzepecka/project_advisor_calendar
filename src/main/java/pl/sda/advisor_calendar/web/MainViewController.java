@@ -13,5 +13,6 @@ class MainViewController {
         ModelAndView mav = new ModelAndView("index.html");
         mav.addObject(new UserDTO());
         return mav;
+
     }
 }

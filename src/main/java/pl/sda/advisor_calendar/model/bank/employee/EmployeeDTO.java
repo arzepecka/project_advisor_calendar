@@ -1,7 +1,6 @@
 package pl.sda.advisor_calendar.model.bank.employee;
 
 import lombok.*;
-import pl.sda.advisor_calendar.model.bank.DepartmentDTO;
 
 @Setter
 @Getter
@@ -21,6 +20,6 @@ public class EmployeeDTO{
     private String address;
 
 
-    public EmployeeDTO(String province, String city, String address1, String jobTitle, String name, String lastName) {
+    public EmployeeDTO(String address, String name, String lastName) {
     }
 }

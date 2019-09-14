@@ -25,7 +25,7 @@ public class AddressEntity {
     @Column(name = "adres")
     private String address;
 
-    @OneToMany(mappedBy = "adres")
+    @OneToMany(mappedBy = "addressEntity")
     private List<EmployeeEntity> departmentEmployeesList;
 
     @ManyToOne()

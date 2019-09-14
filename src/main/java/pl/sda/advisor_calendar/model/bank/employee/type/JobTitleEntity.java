@@ -23,7 +23,7 @@ public class JobTitleEntity {
     @Column(name = "specjalizacja")
     private String jobTitle;
 
-    @OneToMany(mappedBy = "specjalizacja")
+    @OneToMany(mappedBy = "jobTitleEntity")
     private List<EmployeeEntity> departmentEmployeesList;
 
     public JobTitleDTO toDto() {

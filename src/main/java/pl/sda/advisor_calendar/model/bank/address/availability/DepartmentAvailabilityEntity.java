@@ -23,9 +23,9 @@ public class DepartmentAvailabilityEntity {
     private Long id;
     @Column(name = "czynny_od")
     private LocalTime availableFrom;
-    @Column(name = "czynny do")
+    @Column(name = "czynny_do")
     private LocalTime availableTo;
 
-    @OneToMany(mappedBy = "dostepnosc_oddzialu")
+    @OneToMany(mappedBy = "departmentAvailabilityEntity")
     private Set<AddressEntity> departmentAvailability;
 }

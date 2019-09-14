@@ -3,39 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Umów spotkanie</title>
-<<<<<<< HEAD
-</head>
-
-<body>
-<div th:fragment="employeeForm">
-    <form th:action="@{/department/get}" method="get" th:object="${departments}">
-    Wybierz oddział
-    <br>
-    <label th:for="province"></label>
-    <select id="province">
-        <option selected>Województwo</option>
-    </select> </br></br>
-    <label th:for="city"></label>
-    <select id="city">
-        <option selected>Miasto</option>
-    </select></br></br>
-    <label th:for="address"></label>
-    <select id="address">
-        <option selected>Adres oddziału</option>
-    </select></br></br>
-    <label th:for="jobTitle"></label>
-    <select id="jobTitle">
-        <option selected>Specjalizacja</option>
-    </select></br></br>
-    <label th:for="employee"></label>
-    <select id="employee">
-        <option selected>Imie i nazwisko</option>
-    </select>
-    </br></br>
-    </form>
-</div>
-
-=======
 
 </head>
 <body>
@@ -53,21 +20,24 @@
                 <td align="center"><br>
                     <label  th:for="privince"></label>
                     <select style="width: 400px; height: 40px" id="province">
-                        <option selected>Województwo</option>
+                            <option selected>Województowo</option>
+                            <option th:each="i : ${province}" th:value="${i.id}" th:text="${i.label}"></option>
                     </select> </br></br></td>
             </tr>
             <br>
             <tr>
                 <td align="center"><label th:for="city"></label>
                     <select style="width: 400px; height: 40px" id="city">
-                        <option selected>Miasto</option>
+                            <option selected>Miejscowość</option>
+                            <option th:each="i : ${city}" th:value="${i.id}" th:text="${i.label}"></option>
                     </select></br></br></td>
             </tr>
             <br>
             <tr>
                 <td align="center"><label th:for="address"></label>
                     <select style="width: 400px; height: 40px" id="address">
-                        <option selected>Adres oddziału</option>
+                        <option selected>Adress oddziału</option>
+                        <option th:each="i : ${address}" th:value="${i.id}" th:text="${i.label}"></option>
                     </select></br></br></td>
             </tr>
             <br>
@@ -75,6 +45,7 @@
                 <td align="center"><label th:for="jobTitle"></label>
                     <select style="width: 400px; height: 40px" id="jobTitle">
                         <option selected>Specjalizacja</option>
+                        <option th:each="i : ${specjalizations}" th:value="${i.id}" th:text="${i.label}"></option>
                     </select></br></br></td>
             </tr>
             <br>
@@ -82,6 +53,7 @@
                 <td align="center"><label th:for="employee"></label>
                     <select style="width: 400px; height: 40px" id="employee">
                         <option selected>Imie i nazwisko</option>
+                        <option th:each="i : ${employees}" th:value="${i.id}" th:text="${i.label}"></option>
                     </select>
                     </br></br></td>
             </tr>
@@ -91,6 +63,5 @@
         </br>
     </form>
 </div>
->>>>>>> origin/rzepecka
 </body>
 </html>

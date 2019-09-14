@@ -2,12 +2,13 @@ package pl.sda.advisor_calendar.model.bank;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import pl.sda.advisor_calendar.model.bank.province.ProvinceEntity;
 
 import java.util.List;
 
-public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Long> {
+public interface DepartmentRepository extends JpaRepository<ProvinceEntity, Long> {
 
-    List<DepartmentEntity> findDistinctByProvinceOrderByProvinceAsc(String searchProvince);
+    List<ProvinceEntity> findDistinctByProvinceOrderByProvinceAsc(String searchProvince);
 
 //    @Query("select city from DepartmentEntity where provinceIsChosen ")
 //    List<DepartmentEntity> findByCity(String searchCity);

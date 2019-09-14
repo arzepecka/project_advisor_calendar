@@ -1,5 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Umów spotkanie</title>
@@ -19,7 +18,6 @@
 </head>
 <body>
 <div th:fragment="calendarForm">
-<<<<<<< HEAD
     <h1>${monthName} ${firstDay.year}</h1>
     <div class="container">
         <div class="row">
@@ -54,45 +52,6 @@
         </c:forEach>
     </div>
     </div>
-
-</body>
-</html>
-=======
-<h1>${monthName} ${firstDay.year}</h1>
-<div class="container">
-    <div class="row">
-        <div class="col-sm">Poniedziałek</div>
-        <div class="col-sm">Wtorek</div>
-        <div class="col-sm">Środa</div>
-        <div class="col-sm">Czwartek</div>
-        <div class="col-sm">Piątek</div>
-        <div class="col-sm">Sobota</div>
-        <div class="col-sm">Niedziela</div>
-    </div>
-    <div class="row">
-        <c:forEach begin="1" end="${firstDay.dayOfWeek.value - 1}">
-            <div class="col-sm"></div>
-        </c:forEach>
-
-        <c:forEach items="${tasks}" var="tasksForDay" varStatus="status">
-            <div class="col-sm">
-                <c:set var="day" value="${firstDay
-                    .withDayOfMonth(status.index+1)}"/>
-                <p class="${day.dayOfWeek}"><b>${status.index+1} </b></p>
-                <c:forEach items="${tasksForDay}" var="task">
-                    <p>${task.description}</p>
-                </c:forEach>
-            </div>
-            <c:if test="${day.dayOfWeek.value == 7}">
-    </div><div class="row">
-    </c:if>
-    </c:forEach>
-    <c:forEach begin="${day.dayOfWeek.value + 1}" end="7">
-        <div class="col-sm"></div>
-    </c:forEach>
-</div>
-</div>
 </div>
 </body>
 </html>
->>>>>>> origin/rzepecka

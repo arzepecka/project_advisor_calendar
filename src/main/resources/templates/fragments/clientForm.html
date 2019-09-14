@@ -6,41 +6,39 @@
 </head>
 
 <body>
+<div th:fragment="clientForm">
+    <form style="width: 500px">
 
-<form>
-    <table class="blueTable" style="height: 155px;" width="586" bgcolor="#d3d3d3" >
-        <tr>
-            <td></td>
-            <td align="center"><input type="hidden" id="id" name="id" th:value="${userDTO.id}"/></td>
-        </tr>
-        <br>
-        <tr>
-            <td width="100px">Imie:</td>
-            <td align="center"><input type="text" id="name" name="name" placeholder="Wpisz imię" th:value="${userDTO.name}"/></td>
-        </tr>
-        <br>
-        <tr>
-            <td>Nazwisko:</td>
-            <td align="center"><input type="text" id="lastName" name="lastName" placeholder="Wpisz nazwisko"
-                       th:value="${userDTO.lastName}"/></td>
-        </tr>
-        <br>
-        <tr>
-            <td>Numer telefonu:</td>
-            <td align="center"><input type="text" id="phoneNumber" name="phoneNumber" placeholder="Wpisz numer w formacie XXX-XXX-XXX"
-                       th:value="${userDTO.phoneNumber}"/></td>
-        </tr>
-        <br>
-        <tr>
-            <td>E-mail:</td>
-            <td align="center"><input type="text" id="email" name="email" placeholder="Wpisz email" th:value="${userDTO.email}"/></td>
-        </tr>
-        <br>
+        <table bgcolor="#d3d3d3" width="400px" style="height: 400px">
+            <tr>
+                <th><h2>Dane osobowe</h2></th>
+                <td align="center"><input type="hidden" id="id" name="id" th:value="${userDTO.id}"/></td>
+            </tr>
+            <br>
+            <tr>
 
+                <td align="center"><input type="text" id="name" name="name" size="50" maxlength="30" style="height: 40px" placeholder="Wpisz imię" th:value="${userDTO.name}"/></td>
+            </tr>
+            <br>
+            <tr>
+                <td align="center"><input type="text" id="lastName" name="lastName" size="50" maxlength="50" style="height: 40px" placeholder="Wpisz nazwisko"
+                                          th:value="${userDTO.lastName}"/></td>
+            </tr>
+            <br>
+            <tr>
+                <td align="center"><input type="text" id="phoneNumber" name="phoneNumber" size="50" maxlength="9" style="height: 40px" placeholder="Wpisz numer w formacie 123456789"
+                                          th:value="${userDTO.phoneNumber}"/></td>
+            </tr>
+            <br>
+            <tr>
+                <td align="center"><input type="text" id="email" name="email" size="50" maxlength="30" style="height: 40px" placeholder="Wpisz email" th:value="${userDTO.email}"/></td>
+            </tr>
+            <br>
+        </table>
+        <label><input type="checkbox" name="checkbox" th:value="${userDTO.regConfirm}"> Potwierdzam znajomość regulaminu.</label>
+        <a href="regulamin.html">Zobacz regulamin</a>
+    </form>
 
-    </table>
-</form>
-
-
+</div>
 </body>
 </html>
