@@ -22,8 +22,10 @@ public class DepartmentAvailabilityEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "czynny_od")
+    @Enumerated(EnumType.STRING)
     private OpeningHours openingHours;
     @Column(name = "czynny_do")
+    @Enumerated(EnumType.STRING)
     private ClosingHours closingHours;
 
     @OneToMany(mappedBy = "departmentAvailabilityEntity")

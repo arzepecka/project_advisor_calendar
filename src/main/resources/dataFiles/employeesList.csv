@@ -1,4 +1,4 @@
-id;imie;nazwisko;mail;spec;oddzial
+id;imie;nazwisko;email;jobTitle_id;departmentAddress_id
 1;Barbara;Fibiana;rzepecka00@gmail.com;1;1
 2;Barbara;Fornal;rzepecka00@gmail.com;2;2
 3;Barbara;Griczan;rzepecka00@gmail.com;3;3
