@@ -22,10 +22,10 @@ public class DepartmentAvailabilityEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "czynny_od")
-    private LocalTime availableFrom;
-    @Column(name = "czynny do")
-    private LocalTime availableTo;
+    private OpeningHours openingHours;
+    @Column(name = "czynny_do")
+    private ClosingHours closingHours;
 
-    @OneToMany(mappedBy = "dostepnosc_oddzialu")
+    @OneToMany(mappedBy = "departmentAvailabilityEntity")
     private Set<AddressEntity> departmentAvailability;
 }

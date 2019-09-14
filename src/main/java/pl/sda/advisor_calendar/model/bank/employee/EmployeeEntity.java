@@ -25,8 +25,6 @@ public class EmployeeEntity {
     private String name;
     @Column(name = "nazwisko")
     private String lastName;
-    @Column(name = "specjalizacja")
-    private String jobTitle;
     @Column(name = "email")
     private String email;
 
@@ -43,7 +41,6 @@ public class EmployeeEntity {
                 .id(id)
                 .name(name)
                 .lastName(lastName)
-                .jobTitle(jobTitle)
                 .build();
     }
 }

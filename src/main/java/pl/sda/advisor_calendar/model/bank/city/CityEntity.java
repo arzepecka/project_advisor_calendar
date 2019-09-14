@@ -28,7 +28,7 @@ public class CityEntity {
     @JoinColumn(name = "wojewodztwo")
     private ProvinceEntity provinceEntity;
 
-    @OneToMany(mappedBy = "miejscowosc")
+    @OneToMany(mappedBy = "cityEntity")
     private List<AddressEntity> departmentAddressesList;
 
     public CityDTO toDto() {

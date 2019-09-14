@@ -23,7 +23,7 @@ public class ProvinceEntity {
     @Column(name = "wojewodztwo")
     private String province;
 
-    @OneToMany(mappedBy = "wojewodztwo")
+    @OneToMany(mappedBy = "provinceEntity")
     private List<CityEntity> departmentCitiesList;
 
     public ProvinceDTO toDto() {
