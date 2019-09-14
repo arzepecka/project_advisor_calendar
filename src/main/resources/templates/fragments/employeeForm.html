@@ -21,6 +21,7 @@
                     <label  th:for="privince"></label>
                     <select style="width: 400px; height: 40px" id="province">
                         <option selected>Województwo</option>
+                        <option th:each="i : ${province}" th:value="${i.id}" th:text="${i.province}"></option>
                     </select> </br></br></td>
             </tr>
             <br>
@@ -42,6 +43,7 @@
                 <td align="center"><label th:for="jobTitle"></label>
                     <select style="width: 400px; height: 40px" id="jobTitle">
                         <option selected>Specjalizacja</option>
+                        <option th:each="i : ${jobTitle}" th:value="${i.id}" th:text="${i.jobTitle}"></option>
                     </select></br></br></td>
             </tr>
             <br>

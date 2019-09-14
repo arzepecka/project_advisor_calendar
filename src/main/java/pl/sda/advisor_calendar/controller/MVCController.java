@@ -1,5 +1,5 @@
 package pl.sda.advisor_calendar.controller;
 
-public class DepartmentQueryService {
+public class MVCController {
 
 }
