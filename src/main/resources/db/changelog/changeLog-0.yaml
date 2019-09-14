@@ -1,0 +1,214 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1568462668334-1
+      author: rzepe (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: adres
+                  type: VARCHAR(255)
+              - column:
+                  name: miejscowosc
+                  type: BIGINT
+              - column:
+                  name: dostepnosc_oddzialu
+                  type: BIGINT
+            tableName: adres
+  - changeSet:
+      id: 1568462668334-2
+      author: rzepe (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: czynny_do
+                  type: VARCHAR(255)
+              - column:
+                  name: czynny_od
+                  type: VARCHAR(255)
+            tableName: dotepnosc_oddzialu
+  - changeSet:
+      id: 1568462668334-3
+      author: rzepe (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: next_val
+                  type: BIGINT
+            tableName: hibernate_sequence
+  - changeSet:
+      id: 1568462668334-4
+      author: rzepe (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: miejscowosc
+                  type: VARCHAR(255)
+              - column:
+                  name: wojewodztwo
+                  type: BIGINT
+            tableName: miejscowosc
+  - changeSet:
+      id: 1568462668334-5
+      author: rzepe (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: nazwisko
+                  type: VARCHAR(255)
+              - column:
+                  name: imie
+                  type: VARCHAR(255)
+              - column:
+                  name: adres_oddzialu
+                  type: BIGINT
+              - column:
+                  name: specjalizacja
+                  type: BIGINT
+            tableName: pracownik
+  - changeSet:
+      id: 1568462668334-6
+      author: rzepe (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: specjalizacja
+                  type: VARCHAR(255)
+            tableName: specjalizacja
+  - changeSet:
+      id: 1568462668334-7
+      author: rzepe (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: adres
+                  type: VARCHAR(255)
+              - column:
+                  name: otwarty_od
+                  type: datetime
+              - column:
+                  name: otwarty_do
+                  type: datetime
+              - column:
+                  name: miasto
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: nazwisko
+                  type: VARCHAR(255)
+              - column:
+                  name: imie
+                  type: VARCHAR(255)
+              - column:
+                  name: numer_telefonu
+                  type: BIGINT
+              - column:
+                  name: wojewodztwo
+                  type: VARCHAR(255)
+            tableName: visit
+  - changeSet:
+      id: 1568462668334-8
+      author: rzepe (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: wojewodztwo
+                  type: VARCHAR(255)
+            tableName: wojewodztwo
+  - changeSet:
+      id: 1568462668334-9
+      author: rzepe (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: specjalizacja
+            indexName: FK7mbog4i19450i06kbop9crkjn
+            tableName: pracownik
+  - changeSet:
+      id: 1568462668334-10
+      author: rzepe (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: dostepnosc_oddzialu
+            indexName: FKh9c87dp636sg2kgyv2n3kcvj1
+            tableName: adres
+  - changeSet:
+      id: 1568462668334-11
+      author: rzepe (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: miejscowosc
+            indexName: FKqjahn4nili7ys20a7w02wlxm9
+            tableName: adres
+  - changeSet:
+      id: 1568462668334-12
+      author: rzepe (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: wojewodztwo
+            indexName: FKs04d1civ9r8l383iuuwwpe2fo
+            tableName: miejscowosc
+  - changeSet:
+      id: 1568462668334-13
+      author: rzepe (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: adres_oddzialu
+            indexName: FKsg7d55486bpq260kthn24hc4
+            tableName: pracownik

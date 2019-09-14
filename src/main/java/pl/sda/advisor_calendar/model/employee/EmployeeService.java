@@ -20,10 +20,5 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    private List<EmployeeDTO> getAll(){
-        return employeeRepository.findAll().stream()
-                .map(e-> new EmployeeDTO(e.getAddressEntity().getAddress(),
-                        e.getName(), e.getLastName())).collect(Collectors.toList());
-    }
 
 }

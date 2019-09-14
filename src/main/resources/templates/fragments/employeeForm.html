@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Umów spotkanie</title>
@@ -16,12 +16,14 @@
             </tr>
             <br>
             <tr>
+                <ul>
+                    <li><a th:href="@{/department/create}"></a></li>
 
                 <td align="center"><br>
-                    <label  th:for="privince"></label>
+                    <label  th:for="province"></label>
                     <select style="width: 400px; height: 40px" id="province">
                             <option selected>Województowo</option>
-                            <option th:each="i : ${province}" th:value="${i.id}" th:text="${i.label}"></option>
+                            <option th:each="i : ${province}" th:value="${i.id}" th:text="${i.province}"></option>
                     </select> </br></br></td>
             </tr>
             <br>
@@ -56,7 +58,10 @@
                         <option th:each="i : ${employees}" th:value="${i.id}" th:text="${i.label}"></option>
                     </select>
                     </br></br></td>
+
+
             </tr>
+            </ul>
             <br>
         </table>
         </br>

@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import pl.sda.advisor_calendar.model.bank.city.CityEntity;
 
 import javax.persistence.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.List;
 
 @Data
@@ -27,6 +30,14 @@ public class ProvinceEntity {
     private List<CityEntity> departmentCitiesList;
 
     public ProvinceDTO toDto() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("*/provincesList.csv"));
+            reader.lines().spliterator();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
         return ProvinceDTO.builder()
                 .id(id)
                 .province(province)
