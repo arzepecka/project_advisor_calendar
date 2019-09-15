@@ -8,13 +8,10 @@ import pl.sda.advisor_calendar.model.user.UserDTO;
 @Controller
 class MainViewController {
 
-    @RequestMapping
+    @RequestMapping("/")
     ModelAndView mainView() {
         ModelAndView mav = new ModelAndView("index.html");
         mav.addObject(new UserDTO());
-
-
-
 
         return mav;
     }

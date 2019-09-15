@@ -18,7 +18,7 @@
             <tr>
 
                 <td align="center"><br>
-                    <label  th:for="privince"></label>
+                    <label  th:for="province"></label>
                     <select style="width: 400px; height: 40px" id="province">
                         <option selected>Województwo</option>
                         <option th:each="i : ${province}" th:value="${i.id}" th:text="${i.province}"></option>
