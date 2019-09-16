@@ -1,7 +1,10 @@
-package pl.sda.advisor_calendar.model.employee;
+package pl.sda.advisor_calendar.model.bank.employee;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.sda.advisor_calendar.model.bank.employee.EmployeeEntity;
+
+import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
+
+    List<EmployeeEntity> findByName(String searchName);
 }

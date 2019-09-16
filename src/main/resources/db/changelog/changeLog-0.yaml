@@ -37,7 +37,7 @@ databaseChangeLog:
               - column:
                   name: czynny_od
                   type: VARCHAR(255)
-            tableName: dotepnosc_oddzialu
+            tableName: dostepnosc_oddzialu
   - changeSet:
       id: 1568462668334-3
       author: rzepe (generated)

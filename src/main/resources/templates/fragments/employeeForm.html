@@ -1,13 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <script th:src="@{/js/jquery.js}"></script>
+
     <meta charset="UTF-8">
     <title>Umów spotkanie</title>
+
+    <script>
+        $(document).ready(function() {
+
+            $('#provinces').on('change', function() {
+                $.ajax({
+                    url: "/department/" + $('#provinces').val(),
+                    type: "GET",
+                    dataType : "json"
+                }).done(function(response) {
+                    $('#cities').html('');
+
+                    $.each(response, function(index, city) {
+                        $('#cities').append('<option value="'+city.id+'">'
+                            + city + '</option>')
+                    })
+                })
+            });
+            $('#cities').on('change', function() {
+                $.ajax({
+                    url: "/department/" + $('#cities').val(),
+                    type: "GET",
+                    dataType : "json"
+                }).done(function(response) {
+                    $('#addresses').html('');
+
+                    $.each(response, function(index, address) {
+                        $('#addresses').append('<option value="'+address.id+'">'
+                            + address + '</option>')
+                    })
+                })
+            });
+            $('#addresses').on('change', function() {
+                $.ajax({
+                    url: "/department/" + $('#addresses').val(),
+                    type: "GET",
+                    dataType : "json"
+                }).done(function(response) {
+                    $('#specjalizations').html('');
+
+                    $.each(response, function(index, specialization) {
+                        $('#specjalizations').append('<option value="'+specialization.id+'">'
+                            + specialization + '</option>')
+                    })
+                })
+            });
+        });
+    </script>
 
 </head>
 <body>
 <div th:fragment="employeeForm">
-    <form style="width: 500px">
+    <form th:action="@{/department}" method="GET" th:object="${province}">
 
         <table bgcolor="#f5f5f5" width="400px" style="height: 400px">
             <tr>
@@ -16,14 +67,10 @@
             </tr>
             <br>
             <tr>
-                <ul>
-                    <li><a th:href="@{/department/create}"></a></li>
-
                 <td align="center"><br>
-                    <label  th:for="province"></label>
-                    <select style="width: 400px; height: 40px" id="province">
+                    <select style="width: 400px; height: 40px" id="provinces">
                             <option selected>Województowo</option>
-                            <option th:each="i : ${province}" th:value="${i.id}" th:text="${i.province}"></option>
+                            <option th:each="i : ${provinces}" th:value="${i.id}" th:text="${i.province}"></option>
                     </select> </br></br></td>
             </tr>
             <br>

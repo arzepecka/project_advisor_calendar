@@ -30,14 +30,6 @@ public class ProvinceEntity {
     private List<CityEntity> departmentCitiesList;
 
     public ProvinceDTO toDto() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("*/provincesList.csv"));
-            reader.lines().spliterator();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
         return ProvinceDTO.builder()
                 .id(id)
                 .province(province)

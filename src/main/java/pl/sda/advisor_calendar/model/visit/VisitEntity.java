@@ -18,6 +18,7 @@ public class VisitEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "imie")
     private String name;
     @Column(name = "Nazwisko")
     private String lastName;
