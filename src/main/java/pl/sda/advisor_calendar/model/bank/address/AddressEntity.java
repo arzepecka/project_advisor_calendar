@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import pl.sda.advisor_calendar.model.bank.address.availability.DepartmentAvailabilityEntity;
 import pl.sda.advisor_calendar.model.bank.city.CityEntity;
 import pl.sda.advisor_calendar.model.bank.employee.EmployeeEntity;
+import pl.sda.advisor_calendar.model.bank.employee.type.JobTitleEntity;
 
 import javax.persistence.*;
 import java.util.List;

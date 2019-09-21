@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.sda.advisor_calendar.model.bank.address.AddressEntity;
 import pl.sda.advisor_calendar.model.bank.employee.EmployeeEntity;
 
 import javax.persistence.*;

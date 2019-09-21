@@ -27,6 +27,57 @@
             })
         })
     </script>
+
+
+    <script>
+        $(document).ready(function() {
+
+            $('#province').on('change', function() {
+                $.ajax({
+                    url: "/province/" + $('#province').val(),
+                    type: "GET",
+                    dataType : "json"
+                }).done(function(response) {
+                    $('#city').html('');
+
+                    $.each(response, function(index, city) {
+                        $('#city').append('<option value="'+city.id+'">'
+                            + city + '</option>')
+                    })
+                })
+            });
+            $('#city').on('change', function() {
+                $.ajax({
+                    url: "/city/" + $('#city').val(),
+                    type: "GET",
+                    dataType : "json"
+                }).done(function(response) {
+                    $('#address').html('');
+
+                    $.each(response, function(index, address) {
+                        $('#address').append('<option value="'+ address.id+'">'
+                            + address + '</option>')
+                    })
+                })
+            });
+            $('#address').on('change', function() {
+                $.ajax({
+                    url: "/address/" + $('#address').val(),
+                    type: "GET",
+                    dataType : "json"
+                }).done(function(response) {
+                    $('#jobTitle').html('');
+
+                    $.each(response, function(index, specialization) {
+                        $('#jobTitle').append('<option value="'+ jobTitle.id+'">'
+                            + jobTitle + '</option>')
+                    })
+                })
+            });
+        });
+    </script>
+
+
     <style>
         .item {
             background-color:#e9ebee;
